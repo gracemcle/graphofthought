@@ -1,0 +1,14 @@
+axpy:
+  kernel: |
+    __global__ void axpy(size_t* a, size_t* b, size_t* c, size_t scalar, int stride){
+      size_t idx = blockIdx.x * blockDim.x + threadIdx.x;
+
+      a[idx+stride] = b[idx+stride]+scalar*c[idx+stride];
+    }
+copy:
+  kernel: |
+    __global__ void copy(size_t* a, size_t* b, size_t scalar, int stride){
+      size_t idx = blockIdx.x * blockDim.x + threadIdx.x;
+
+      a[idx+stride] = b[idx+stride]
+    }
